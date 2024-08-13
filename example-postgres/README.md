@@ -11,12 +11,11 @@ You can play with it here: https://scarlet-male-mink.app.genez.io/
 3. Install genezio with `npm install -g genezio`
 4. Deploy the project with `genezio deploy`
 5. Go to the Genezio App in your broser by accessing https://app.genez.io/ and choose your project
-6. Create and link a new Posgres database (call it "demo") from the Databases section of your project.
-7. Enable Authentication by choosing "Authentication" on the left-side menu (reuse the database you just created), and enable the Email provider
-8. Make sure you update the reset password URL from Authentication / Settings / Email Templates / Reset Password to `https://ABC-DEF-GHI.app.genez.io/reset-password` (you'll find your domain name under the Domains section)
-9. Update the auth token / region in the `client/src/authProvider.ts` file with the ones provided by Genezio - you can find them in the above Authentication section
-10. Redeploy the genezio project by running `genezio deploy` again
-11. Go to `https://ABC-DEF-GHI.app.genez.io/` again and test the project in your browser
+6. Enable Authentication by choosing "Authentication" on the left-side menu (reuse the database you just created), and enable the Email provider
+7. Make sure you update the reset password URL from Authentication / Settings / Email Templates / Reset Password to `https://ABC-DEF-GHI.app.genez.io/reset-password` (you'll find your domain name under the Domains section)
+8. Update the auth token / region in the `client/src/authProvider.ts` file with the ones provided by Genezio - you can find them in the above Authentication section
+9. Redeploy the genezio project by running `genezio deploy` again
+10. Go to `https://ABC-DEF-GHI.app.genez.io/` again and test the project in your browser
 
 If you want to test Genezio and Refine locally:
 
