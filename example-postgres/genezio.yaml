@@ -8,8 +8,8 @@ backend:
         local: npm install
 frontend:
     environment:
-        AUTHENTICATION_REGION: ${{ services.authentication.region }}
-        AUTHENTICATION_TOKEN: ${{ services.authentication.token }}
+        VITE_AUTHENTICATION_REGION: ${{ services.authentication.region }}
+        VITE_AUTHENTICATION_TOKEN: ${{ services.authentication.token }}
     path: client
     publish: dist
     scripts:
