@@ -25,12 +25,12 @@ region: eu-central-1
 services:
     authentication:
         database:
-            name: demo
+            name: demo2
             region: eu-central-1
         providers:
             email: true
     databases:
-        - name: demo
+        - name: demo2
           region: eu-central-1
           type: postgres-neon
 yamlVersion: 2
