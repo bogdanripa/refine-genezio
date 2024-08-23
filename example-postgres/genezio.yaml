@@ -1,3 +1,16 @@
+name: refine-postgres
+region: eu-central-1
+services:
+    authentication:
+        database:
+            name: demo
+            region: eu-central-1
+        providers:
+            email: true
+    databases:
+        - name: demo
+          region: eu-central-1
+          type: postgres-neon
 backend:
     language:
         name: ts
@@ -19,18 +32,7 @@ frontend:
             - npm run dev --silent
     sdk:
         language: ts
-    subdomain: gold-continuing-bandicoot
-name: refine-postgres
-region: eu-central-1
-services:
-    authentication:
-        database:
-            name: demo
-            region: eu-central-1
-        providers:
-            email: true
-    databases:
-        - name: demo
-          region: eu-central-1
-          type: postgres-neon
+    environment:
+        AUTHENTICATION_TOKEN: ${{ services.authentication.token }}
+        AUTHENTICATION_REGION: ${{ services.authentication.region }}
 yamlVersion: 2
