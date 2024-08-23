@@ -10,6 +10,12 @@ services:
     - name: demo
       region: eu-central-1
       type: postgres-neon
+  authentication:
+    database:
+      name: demo
+      region: eu-central-1
+    providers:
+      email: true
 backend:
   # The root directory of the backend.
   path: server
