@@ -1,3 +1,19 @@
+name: refine-postgres
+region: eu-central-1
+services:
+    databases:
+        - name: demo
+          region: eu-central-1
+          type: postgres-neon
+    authentication:
+        database:
+            name: demo
+            region: eu-central-1
+        providers:
+            email: true
+	settings:
+	    passwordReset:
+	        redirectURL: https://${{frontend.subdomain}}.dev.app.genez.io/reset-password
 backend:
     language:
         name: ts
@@ -22,17 +38,4 @@ frontend:
             - npm run dev --silent
     sdk:
         language: ts
-name: refine-postgres
-region: eu-central-1
-services:
-    authentication:
-        database:
-            name: demo
-            region: eu-central-1
-        providers:
-            email: true
-    databases:
-        - name: demo
-          region: eu-central-1
-          type: postgres-neon
 yamlVersion: 2
