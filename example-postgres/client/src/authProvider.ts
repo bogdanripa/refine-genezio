@@ -1,5 +1,6 @@
 import { AuthProvider } from "@refinedev/core";
 import { AuthService } from "@genezio/auth";
+
 AuthService.getInstance().setTokenAndRegion(import.meta.env.VITE_AUTHENTICATION_TOKEN, import.meta.env.VITE_AUTHENTICATION_REGION);
 
 export const authProvider: AuthProvider = {
