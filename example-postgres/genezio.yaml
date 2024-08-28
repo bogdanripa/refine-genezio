@@ -8,12 +8,11 @@ services:
     authentication:
         database:
             name: demo
-            region: eu-central-1
         providers:
             email: true
-	settings:
-	    passwordReset:
-	        redirectURL: https://${{frontend.subdomain}}.dev.app.genez.io/reset-password
+        settings:
+            resetPassword:
+                redirectUrl: https://${{frontend.refine-frontend.subdomain}}.dev.app.genez.io/reset-password
 backend:
     language:
         name: ts
@@ -23,6 +22,7 @@ backend:
         deploy: npm install
         local: npm install
 frontend:
+    name: refine-frontend
     environment:
         VITE_AUTHENTICATION_REGION: ${{ services.authentication.region }}
         VITE_AUTHENTICATION_TOKEN: ${{ services.authentication.token }}
