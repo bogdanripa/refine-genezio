@@ -12,8 +12,8 @@ services:
         providers:
             email: true
         settings:
-            passwordReset:
-                redirectURL: https://${{frontend.subdomain}}.dev.app.genez.io/reset-password
+            resetPassword:
+                redirectUrl: https://${{frontend.refine-frontend.subdomain}}.dev.app.genez.io/reset-password
 backend:
     path: server
     language:
@@ -23,6 +23,7 @@ backend:
         deploy: npm install
         local: npm install
 frontend:
+    name: refine-frontend
     environment:
         VITE_AUTHENTICATION_REGION: ${{ services.authentication.region }}
         VITE_AUTHENTICATION_TOKEN: ${{ services.authentication.token }}
