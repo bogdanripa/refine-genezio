@@ -13,7 +13,7 @@ services:
             email: true
         settings:
             resetPassword:
-                redirectUrl: https://${{frontend.refine-frontend.subdomain}}.dev.app.genez.io/reset-password
+                redirectUrl: https://${{frontend.refine-frontend.subdomain}}.app.genez.io/reset-password
 backend:
     path: server
     language:
