@@ -38,7 +38,7 @@ import { Login } from "./pages/login";
 import { Register } from "./pages/register";
 
 import dataProvider from "refine-genezio";
-import * as gsdk from "@genezio-sdk/refine";
+import * as gsdk from "@genezio-sdk/refine-json";
 
 function App() {
   return (
