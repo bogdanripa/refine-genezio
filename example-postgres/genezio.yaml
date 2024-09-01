@@ -1,18 +1,3 @@
-name: refine-postgres
-region: eu-central-1
-services:
-    databases:
-        - name: demo
-          region: eu-central-1
-          type: postgres-neon
-    authentication:
-        database:
-            name: demo
-        providers:
-            email: true
-        settings:
-            resetPassword:
-                redirectUrl: https://${{frontend.refine-frontend.subdomain}}.app.genez.io/reset-password
 backend:
     language:
         name: ts
@@ -22,10 +7,10 @@ backend:
         deploy: npm install
         local: npm install
 frontend:
-    name: refine-frontend
     environment:
         VITE_AUTHENTICATION_REGION: ${{ services.authentication.region }}
         VITE_AUTHENTICATION_TOKEN: ${{ services.authentication.token }}
+    name: refine-frontend
     path: client
     publish: dist
     scripts:
@@ -38,4 +23,19 @@ frontend:
             - npm run dev --silent
     sdk:
         language: ts
+name: refine-postgres
+region: eu-central-1
+services:
+    authentication:
+        database:
+            name: demo
+        providers:
+            email: true
+        settings:
+            resetPassword:
+                redirectUrl: https://${{frontend.refine-frontend.subdomain}}.app.genez.io/reset-password
+    databases:
+        - name: demo
+          region: eu-central-1
+          type: postgres-neon
 yamlVersion: 2
