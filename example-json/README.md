@@ -2,7 +2,7 @@
 
 This exemplifies a web admin interface that uses refine as a front-end and Genezio in the backend. It exposes some genezio classes as well as Genezio-based authentication. It uses a plain json file for data storage.
 
-You can play with it here: https://beige-mild-gull.app.genez.io/
+You can play with it here: https://prod-refine-json.app.genez.io
 
 # Deploying this example 
 
