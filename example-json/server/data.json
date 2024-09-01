@@ -2,19 +2,21 @@
     "blogPosts": [
         {
             "id": 1,
-            "title": "John Doe",
-            "content": "Hello John!",
-            "category": {"id": 1, "title": "?"},
+            "title": "My 1st blog post",
+            "content": "Hello World!",
+            "category_ids": [1, 2],
+            "author_id": 1,
             "status": "published",
-            "created_at": "2021-10-10T10:00:00Z"
+            "created_at": "2023-10-10T10:00:00Z"
         },
         { 
             "id": 2,
-            "title": "Jane Doe",
-            "content": "Hello Jane!",
-            "category": {"id": 1, "title": "?"},
+            "title": "About lifestyle",
+            "content": "Lessons from Mary, to the world",
+            "category_ids": [2, 3],
+            "author_id": 2,
             "status": "published",
-            "created_at": "2022-10-10T10:00:00Z"
+            "created_at": "2024-05-10T10:00:00Z"
         }
     ],
     "categories": [
@@ -109,6 +111,16 @@
         {
             "id": 23,
             "title": "Education11"
+        }
+    ],
+    "authors": [
+        {
+            "id": 1,
+            "name": "John Doe"
+        },
+        {
+            "id": 2,
+            "name": "Mary Jane"
         }
     ]
 }

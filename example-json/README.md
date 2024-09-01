@@ -2,7 +2,7 @@
 
 This exemplifies a web admin interface that uses refine as a front-end and Genezio in the backend. It exposes some genezio classes as well as Genezio-based authentication. It uses a plain json file for data storage.
 
-You can play with it here: https://beige-mild-gull.app.genez.io/
+You can play with it here: https://prod-refine-json.app.genez.io
 
 # Deploying this example 
 
@@ -15,11 +15,6 @@ Or follow these steps to deploy this example using genezio's cli
 3. Install genezio with `npm install -g genezio`
 4. Deploy the project with `genezio deploy`
 5. Go to the Genezio App in your broser by accessing https://app.genez.io/ and choose your project
-6. Enable Authentication by choosing "Authentication" on the left-side menu (this will create a database for user management), and enable the Email provider
-7. Make sure you update the reset password URL from Authentication / Settings / Email Templates / Reset Password to `https://ABC-DEF-GHI.app.genez.io/reset-password` (you'll find your domain name under the Domains section)
-8. Update the auth token / region in the `client/src/authProvider.ts` file with the ones provided by Genezio - you can find them in the above Authentication section
-9. Redeploy the genezio project by running `genezio deploy` again
-10. Go to `https://ABC-DEF-GHI.app.genez.io/` again and test the project in your browser
 
 # Using refine on a new genezio project
 

@@ -1,19 +1,36 @@
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Edit, useForm, useSelect } from "@refinedev/antd";
 import MDEditor from "@uiw/react-md-editor";
-import { Form, Input, Select } from "antd";
+import { Form, Input, Select, Checkbox } from "antd";
 
 export const BlogPostEdit = () => {
   const { formProps, saveButtonProps, queryResult, formLoading } = useForm({});
+  const [searchParams] = useSearchParams();
 
   const blogPostsData = queryResult?.data?.data;
 
-  const { selectProps: categorySelectProps } = useSelect({
-    resource: "Categories",
-    // defaultValue: blogPostsData?.category?.id,
-    queryOptions: {
-       enabled: !!blogPostsData?.category?.id,
-    },
+  const { selectProps } = useSelect({
+    resource: "Authors",
+    optionLabel: "name"
   });
+
+  useEffect(() => {
+    const author_id = searchParams.get("author_id");
+
+    if (author_id && author_id !== "null") {
+      formProps.form?.setFieldsValue({
+        author_id,
+      });
+    }
+  }, [searchParams]);
+
+  const { selectProps: categorySelectProps, queryResult: categoryQueryResult } = useSelect({
+    resource: "Categories",
+    optionLabel: "title",
+  });
+
+
 
   return (
     <Edit saveButtonProps={saveButtonProps} isLoading={formLoading}>
@@ -41,17 +58,27 @@ export const BlogPostEdit = () => {
           <MDEditor data-color-mode="light" />
         </Form.Item>
         <Form.Item
-          label={"Category"}
-          name={["category", "id"]}
-          initialValue={formProps?.initialValues?.category?.id}
+          label={"Author"}
+          name={"author_id"}
           rules={[
             {
               required: true,
             },
           ]}
         >
-          <Select {...categorySelectProps} />
+          <Select {...selectProps} />
         </Form.Item>
+        <Form.Item
+          label="Categories"
+          name="category_ids"
+          rules={[{ required: true }]}
+        >
+          <Checkbox.Group options={categoryQueryResult?.data?.data?.map((category: any) => ({
+            label: category.title,
+            value: category.id,
+          }))} />
+        </Form.Item>
+
         <Form.Item
           label={"Status"}
           name={["status"]}
