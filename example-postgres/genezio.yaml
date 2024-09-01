@@ -23,6 +23,7 @@ frontend:
             - npm run dev --silent
     sdk:
         language: ts
+    subdomain: coffee-squealing-firefly
 name: refine-postgres
 region: eu-central-1
 services:

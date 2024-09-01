@@ -23,6 +23,7 @@ frontend:
             - npm run dev --silent
     sdk:
         language: ts
+    subdomain: rose-colourful-haddock
 name: refine-json
 region: eu-central-1
 services:

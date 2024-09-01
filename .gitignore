@@ -1,8 +1,2 @@
-
-server/package-lock.json
-client/src/App.tsx.old
-client/package-lock.json
-client/package-lock.json
-server/package-lock.json
-/refine-genezio/node_modules
-/refine-genezio/dist
+node_modules
+package-lock.json
