@@ -1,5 +1,6 @@
 import { GenezioDeploy, GenezioAuth, GnzContext } from "@genezio/types";
 import {IDataProviderService, DataProviderListParams} from "./DataProvider";
+import {init} from "./Init";
 import pg from 'pg'
 const { Pool } = pg
 
@@ -17,13 +18,7 @@ export class Categories implements IDataProviderService<Category>{
       connectionString: process.env["DEMO_DATABASE_URL"],
       ssl: true,
     });
-    this._init();
-  }
-
-  async _init() {
-    await this.pool.query(
-      "CREATE TABLE IF NOT EXISTS categories (id serial PRIMARY KEY, title VARCHAR(255))"
-    );
+    init(this.pool);
   }
 
   async getList(_context: GnzContext, { pagination, sorters, filters }: DataProviderListParams) {

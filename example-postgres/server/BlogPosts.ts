@@ -1,5 +1,6 @@
 import { GenezioDeploy, GenezioAuth, GnzContext } from "@genezio/types";
 import { IDataProviderService, DataProviderListParams, DataProviderResponse } from "./DataProvider";
+import {init} from "./Init";
 import pg from 'pg';
 const { Pool } = pg;
 
@@ -23,27 +24,7 @@ export class BlogPosts implements IDataProviderService<BlogPost> {
       connectionString: process.env["DEMO_DATABASE_URL"],
       ssl: true,
     });
-    this._init();
-  }
-
-  async _init() {
-    await this.pool.query(
-      `CREATE TABLE IF NOT EXISTS blog_posts (
-        id serial PRIMARY KEY,
-        title VARCHAR(255),
-        content TEXT,
-        author_id INT,
-        status VARCHAR(50),
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )`
-    );
-
-    await this.pool.query(
-      `CREATE TABLE IF NOT EXISTS blog_post_categories (
-        blog_post_id INT NOT NULL REFERENCES blog_posts(id) ON DELETE CASCADE,
-        category_id INT NOT NULL REFERENCES categories(id) ON DELETE CASCADE
-      )`
-    );
+    init(this.pool);
   }
 
   async getList(context: GnzContext, { pagination, sorters, filters }: DataProviderListParams) {
