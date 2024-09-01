@@ -8,17 +8,25 @@ type Category = {
   title: string;
 }
 
+type Author = {
+  id?: number;
+  name: string;
+}
+
 type BlogPost = {
   id?: number;
   title: string;
   content: string;
-  category: Category;
+  author_id?: number;
+  author_name?: string;
+  category_ids?: number[];
   status: string;
   created_at: string;
 }
 
 let bd: BlogPost[] = data.blogPosts;
 let cd: Category[] = data.categories;
+let ad: Author[] = data.authors;
 
 @GenezioDeploy()
 export class BlogPosts implements IDataProviderService<BlogPost>{
@@ -27,10 +35,12 @@ export class BlogPosts implements IDataProviderService<BlogPost>{
   async getList(context: GnzContext, {pagination, sorters, filters} : DataProviderListParams) {
     let r:DataProviderResponse<any> = {data: [] as Record<string, any>, total: 0};
     bd.forEach((item:any) => {
-      const cat = cd.find((c) => c.id == item.category.id);
-      if (cat) {
-          item.category = cat;
-      }
+      // const cat = cd.find((c) => c.id == item.category.id);
+      // if (cat) item.category = cat;
+
+      const aut = ad.find((a) => a.id == item.author_id);
+      if (aut) item.author_name = aut.name;
+
       r.data.push(item);
     });
     r.total = r.data.length;
@@ -46,9 +56,11 @@ export class BlogPosts implements IDataProviderService<BlogPost>{
   async getOne(context: GnzContext, id: number) {
     let r = {data: bd.find((item) => item.id == id), total: 1};
     if (r.data) {
-      const cat = cd.find((item) => item.id == r.data?.category.id);
-      if (cat)
-        r.data.category = cat;
+      // const cat = cd.find((item) => item.id == r.data?.category.id);
+      // if (cat) r.data.category = cat;
+
+      const aut = ad.find((item) => item.id == r.data?.author_id);
+      if (aut) r.data.author_name = aut.name;
     }
     return r;
   }

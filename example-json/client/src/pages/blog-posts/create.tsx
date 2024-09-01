@@ -1,13 +1,32 @@
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Create, useForm, useSelect } from "@refinedev/antd";
 import MDEditor from "@uiw/react-md-editor";
-import { Form, Input, Select } from "antd";
+import { Form, Input, Select, Checkbox } from "antd";
 
 export const BlogPostCreate = () => {
   const { formProps, saveButtonProps } = useForm({});
+  const [searchParams] = useSearchParams();
 
-  const { selectProps: categorySelectProps } = useSelect({
-    resource: "Categories",
+  const { selectProps: authorSelectProps } = useSelect({
+    resource: "Authors",
+    optionLabel: "name",
   });
+
+  const { selectProps: categorySelectProps, queryResult: categoryQueryResult } = useSelect({
+    resource: "Categories",
+    optionLabel: "title",
+  });
+
+  useEffect(() => {
+    const author_id = searchParams.get("author_id");
+
+    if (author_id && author_id !== "null") {
+      formProps.form?.setFieldsValue({
+        author_id,
+      });
+    }
+  }, [searchParams]);
 
   return (
     <Create saveButtonProps={saveButtonProps}>
@@ -35,15 +54,26 @@ export const BlogPostCreate = () => {
           <MDEditor data-color-mode="light" />
         </Form.Item>
         <Form.Item
-          label={"Category"}
-          name={["category", "id"]}
-          rules={[
-            {
-              required: true,
-            },
-          ]}
+            label="Author"
+            name="author_id"
+            rules={[
+              {
+                required: true,
+              },
+            ]}>
+            <Select
+              {...authorSelectProps}
+            />
+        </Form.Item>
+        <Form.Item
+          label="Categories"
+          name="category_ids"
+          rules={[{ required: true }]}
         >
-          <Select {...categorySelectProps} />
+          <Checkbox.Group options={categoryQueryResult?.data?.data?.map((category: any) => ({
+            label: category.title,
+            value: category.id,
+          }))} />
         </Form.Item>
         <Form.Item
           label={"Status"}

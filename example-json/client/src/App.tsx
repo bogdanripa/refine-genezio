@@ -32,6 +32,12 @@ import {
   CategoryList,
   CategoryShow,
 } from "./pages/categories";
+import {
+  AuthorCreate,
+  AuthorEdit,
+  AuthorList,
+  AuthorShow,
+} from "./pages/authors";
 import { ForgotPassword } from "./pages/forgotPassword";
 import { ResetPassword } from "./pages/forgotPassword/reset";
 import { Login } from "./pages/login";
@@ -68,6 +74,16 @@ function App() {
                   create: "/categories/create",
                   edit: "/categories/edit/:id",
                   show: "/categories/show/:id",
+                  meta: {
+                    canDelete: true,
+                  },
+                },
+                {
+                  name: "Authors",
+                  list: "/authors",
+                  create: "/authors/create",
+                  edit: "/authors/edit/:id",
+                  show: "/authors/show/:id",
                   meta: {
                     canDelete: true,
                   },
@@ -128,6 +144,26 @@ function App() {
                       element={
                         <Authenticated key="CategoryEdit" fallback={<CatchAllNavigate to="/login" />}>
                           <CategoryEdit />
+                        </Authenticated>
+                      }
+                    />
+                  </Route>
+                  <Route path="/authors">
+                    <Route index element={<AuthorList />} />
+                    <Route path="show/:id" element={<AuthorShow />} />
+                    <Route
+                      path="create"
+                      element={
+                        <Authenticated key="AuthorCreate" fallback={<CatchAllNavigate to="/login" />}>
+                          <AuthorCreate />
+                        </Authenticated>
+                      }
+                    />
+                    <Route
+                      path="edit/:id"
+                      element={
+                        <Authenticated key="AuthorEdit" fallback={<CatchAllNavigate to="/login" />}>
+                          <AuthorEdit />
                         </Authenticated>
                       }
                     />
